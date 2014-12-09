@@ -6,10 +6,9 @@
 	$password = $_POST['password'];
 
 	if($username && $password){
-		$connect = mysql_connect("localhost","root","password") or die("Couldn't Connect!");
-		mysql_select_db("codeGraderDB") or die("Couldn't find DB");
+		include('includes/database.php');
 
-		$query = mysql_query("SELECT * FROM users WHERE username ='$username'");
+		$query = mysql_query("SELECT * FROM user WHERE username ='$username'");
 
 		$numrows = mysql_num_rows($query);
 

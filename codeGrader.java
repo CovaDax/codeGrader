@@ -5,54 +5,35 @@ import java.sql.*;
 
 public class codeGrader {
 
-	Connection conn = null;
+	private String dir;
+	private File files[];
+
+	public codeGrader(String dir){
+		this.dir = dir;
+		readFiles(dir);
+		gradeFiles();
+	}
+
+	public void readFiles(String dir){
+		File folder = new File(dir);
+		files = folder.listFiles();
+		for(File file : files){
+			if(file.isFile()){
+				System.out.println(file.getName());
+			}
+		}
+	}
+
+	public void gradeFiles(){
+		File compile;
+		for(File file : file){
+			if(file.getName == "Assignment1_0070.java");
+		}
+	}
 
 	public static void main(String args[]){
-		for(String s : args) {
-			//System.out.println(s);
-		}
-		System.out.println("Poop");
-		getDB();
+		String dir = args[0];
+		codeGrader cg = new codeGrader(dir);
 	}
 
-	public void getDB(){
-
-		System.out.println("Penis");	
-
-		try{
-			Statement query = null;
-
-			//register driver
-			Class.forName("com.mysql.jdbc.Driver");
-
-			//open connection
-			//conn = DriverManager.getConnection("jdbc:mysql://localhost/test?" + "user=root&password=password");
-			conn = DriverManager.getConnection("root", "password");
-
-			//make a query
-			query = conn.CreateStatement();
-			String sql = "SELECT * FROM users";
-			ResultSet = rs = query.executeQuery(sql);
-
-			while(rs.next()){
-				int id = rs.getInt("id");
-				String firstName = rs.getString("firstName");
-					System.out.println(firstName);
-				String lastName = rs.getString("lastName");
-					System.out.println(lastName);
-			}
-
-			rs.close();
-			query.close();
-			conn.close();
-
-
-
-
-		} catch (SQLException e){
-			System.out.println("SQLException: " + ex.getMessage());
-    		System.out.println("SQLState: " + ex.getSQLState());
-    		System.out.println("VendorError: " + ex.getErrorCode());
-		}
-	}
 }
