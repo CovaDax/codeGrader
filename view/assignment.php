@@ -17,7 +17,7 @@
 		*		Test Cases
 		*/
 		if($_SESSION['role']=="INSTRUCTOR" || $_SESSION['role']=="ADMIN") { ?>
-			<form class="form-horizontal" action="create_test_cases.php" method="POST">
+			<form class="form-horizontal" action="../scripts/testcases.php" method="POST">
 			  <fieldset>
 			    <div class="form-group">
 			      <label for="textArea" class="col-lg-2 control-label">Test Cases</label>

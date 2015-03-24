@@ -5,12 +5,13 @@
     	include_once(ROOT_PATH . "/models/" . $class_name . ".php");
     }
 
-
-
     session_start();
     if(!isset($_SESSION["username"])){
         header("Location:view/templates/forms/login_form.php");
     }
+
+    // $assign = new Assignment("12345", "1"); 
+    // echo $assign->crn;
 
     // echo ROOT_DIR;
     // echo $_SERVER['HTTP_HOST'];
@@ -36,6 +37,5 @@
             //         //echo $a->crn;
             //     }
             // }
-
     header("Location:view/courses.php");
 ?>
