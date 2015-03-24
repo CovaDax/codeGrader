@@ -37,5 +37,6 @@
             //         //echo $a->crn;
             //     }
             // }
+    header("Location:view/create_assignment.php");
     header("Location:view/courses.php");
 ?>
