@@ -13,7 +13,7 @@
         <span class="icon-bar"></span>
       </button>
         <?php
-          echo "<a href='" . $root . "/view/templates/forms/update_user_form.php' class='navbar-brand'>" . $_SESSION['firstName'] . " " .  $_SESSION['lastName'] . "</a>";
+          echo "<a href='#' class='navbar-brand'>" . $_SESSION['firstName'] . " " .  $_SESSION['lastName'] . "</a>";
     ?>
     </div>
 
@@ -21,7 +21,6 @@
       <ul class="nav navbar-nav">
         <?php
           echo "<li class='active'><a href='http://" . $root . "/index.php'>Home <span class='sr-only'>(current)</span></a></li>";
-          //echo "<li><a href='" . $root . "/scripts/allusers.php'>Users</a></li>";
       if($_SESSION['role'] == "ADMIN"){
         echo "<li><a href='http://" . $root . "/view/allusers.php'>Users</a></li>";
         echo "<li><a href='http://" . $root . "/view/templates/create_user.php'>Create New User</a></li>";

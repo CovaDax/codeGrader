@@ -11,13 +11,13 @@
 	</STYLE>
 
 	<BODY>
-		<div class="panel panel-primary">
+		<div class="panel panel-primary" style="margin:3%">
 		  <div class="panel-heading">
 		    <h3 class="panel-title">Login</h3>
 		  </div>
 		  <div class="panel-body">
 		    <div class="container">
-				<form class="form-horizontal" action= '../../scripts/login.php' method="POST">
+				<form class="form-horizontal" action= '../../scripts/login.php' method="POST" style="padding:3%">
 				  <fieldset>
 				    <div class="form-group">
 				    	<!--username-->	
