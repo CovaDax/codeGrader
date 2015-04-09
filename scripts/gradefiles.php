@@ -1,21 +1,13 @@
 <?php
 	
 	include "../config.php";
-	
-	function __AUTOLOAD($class_name){
-		include ROOT_PATH . "/models/" . $class_name . ".php";
-	}
-
 	session_start();
-	$postdir = $_SESSION['directory'];
+	$postdir = $_GET['title'];
 	$newdir = explode("/",$postdir);
-	$newdir[4] = $_GET['user'];
-	$postdir = $newdir[0]."/".$newdir[1]."/".$newdir[2]."/".$newdir[3]."/".$newdir[4];
-	$testfile = $newdir[0]."/".$newdir[1]."/".$newdir[2]."/".$newdir[3]."/testcases.txt";
-	$assignmenttitle = $_GET['title'];
-
-	$explosion = explode("/", $postdir);
-	$submissionusername = $explosion[4];
+	$testfile = $newdir[0]."/".$newdir[1]."/".$newdir[2]."/testcases.txt";
+	$assignmentid = $newdir[2];
+	$assignmenttitle = $_SESSION['assignmenttitle'];
+	$submissionusername = $newdir[3];
 
 	echo "<STYLE>";
 		include(ROOT_PATH . "/css/bootstrap.css");
@@ -25,33 +17,39 @@
 
 	$db = new Database($config['db']);
 
+		echo $submissionusername;
+
 	$sql = "SELECT * FROM user WHERE username = '$submissionusername'";
 	$result = $db->query($sql);
 	$user = array();
 	if($result->num_rows > 0){
 		while($row = $result->fetch_assoc()){
     		$user[] = $row;
+    		$userid = $row['id'];
 		}
 	}
 
+	$results = $db->query("SELECT * FROM submission s
+							INNER JOIN submission_user su ON s.id = su.submission_id AND user_id = '$userid'
+							INNER JOIN assignment_submission sa ON s.id = sa.submission_id AND assignment_id = '$assignmentid'
+						LIMIT 0, 30 ");
 
-	$lastfour = substr($user['id'], -4);
-	$compilename = "$postdir/" . $assignmenttitle . "_" . $lastfour . ".java";
-	$runname = "$postdir/" . $assignmenttitle . "_" . $lastfour . ".class";
+	$lastfour = substr($userid, -4);
+	$compilename = $postdir. "/" . $assignmenttitle . "_" . $lastfour . ".java";
+	$runname = $postdir . "/" . $assignmenttitle . "_" . $lastfour . ".class";
 
-	$text = file_get_contents($testfile);
+	$text = file_get_contents(ROOT_PATH . "/" . $testfile);
 
-	?>
-<?php 
 	$sql = "SELECT * FROM submission WHERE files='$postdir'";
 	$result = $db->query($sql);
-	$submission = array();
-	if($result->num_row > 0){
-		while($row->$result->fetch_assoc()){
-			$submission[] = $row;
+	$submissionid;
+	if($result->num_rows > 0){
+		while($row = $result->fetch_assoc()){
+			$submissionid = $row['id'];
 		}
 	}
-	echo "<form class='form-horizontal' action='grade.php?id=$submissionid' method='POST'>";	?>
+	echo "<form class='form-horizontal' action='grade.php?id=" . $submissionid . "' method='POST'>";	
+?>
   <fieldset>
     <div class="form-group">
       <label for="textArea" class="col-lg-1 control-label">Grade</label>
@@ -66,11 +64,11 @@
 
 	<?php
 	passthru("rm " . $runname);
-	if(file_exists($compilename)){
-		passthru("javac $postdir/" . $assignmenttitle . "_" . $lastfour . ".java", $output);
-		if(file_exists($runname)){
+	if(file_exists(ROOT_PATH . "/" . $compilename)){
+		passthru("javac " . ROOT_PATH . "/$postdir/" . $assignmenttitle . "_" . $lastfour . ".java", $output);
+		if(file_exists(ROOT_PATH . "/" . $runname)){
 			foreach(preg_split("/((\r?\n)|(\r\n?))/", $text) as $line){
-				$query = mysql_query("UPDATE submission SET compiled='1' WHERE files='$postdir'");
+				$db->query("UPDATE submission SET compiled='1' WHERE files='$postdir'");
 				echo "<div class='alert alert-dismissable alert-success'>";
 				echo "<button type='button' class='close' data-dismiss='alert'></button>";
 				echo "<PRE>";
@@ -80,12 +78,12 @@
 				echo "</div>";
 			}
 		} else {
-			$query = mysql_query("UPDATE submission SET compiled='0' WHERE files=$postdir");
+			$db->query("UPDATE submission SET compiled='0' WHERE files='$postdir'");	
 
 			echo "<div class='alert alert-dismissable alert-warning'>";
 			echo "<button type='button' class='close' data-dismiss='alert'></button>";
 			echo "<PRE>";
-				echo "Student's File did not compile";
+				echo "Student's File did not compile\n";
 			echo "</PRE>";
 			echo "</div>";
 		}

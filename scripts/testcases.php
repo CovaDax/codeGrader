@@ -8,30 +8,29 @@
     }
 
     $crn = $_SESSION['crn'];
-    $id = $_SESSION['assignmentid'];
+    $id = $_GET['id'];
 
 	$testcases = $_POST['testcase'];
-	$dir = ROOT_PATH . "/uploads/$crn/$assignmentid";
-	$file = ROOT_PATH . "/uploads/$crn/$assignmentid/testcases.txt";
+	$dir = ROOT_PATH . "/uploads/$crn/$id";
+	$file = ROOT_PATH . "/uploads/$crn/$id/testcases.txt";
 	echo "<PRE>";
 	echo $dir . "\n";
 	echo $file . "\n";
-	// if(!file_exists($dir)){
-	// 	if(!mkdir($dir, 0777, true)){
-	// 		die("failed to create folders");
-	// 	} else {
-	// 		echo "no works";
-	// 	}
-	// } else {
-	// 	die "could not find " . $dir;
-	// }
 
-	 	// Open the file to get existing content
-	//$current = file_get_contents($file);
+	if(!file_exists($dir)){
+		if(!mkdir($dir, 0777, true)){
+			die("failed to create folders");
+		} else {
+			die("Error");
+		}
+	}
+
+	// Open the file to get existing content
+	$current = file_get_contents($file);
 		// Write the contents back to the file
-	//file_put_contents($file, $testcases);
-	//exec("chmod 777 " . $file);
+	file_put_contents($file, $testcases);
+	exec("chmod 777 " . $file);
 
-	// 	echo "Location:http://" . $relative . "/view/assignment.php?id=$_SESSION['assignmentid']&crn=$_SESSION['crn']";
+	header("Location:http://" . $relative . "/view/assignment.php?id=" . $id . "&crn=" . $crn);
 	echo "test";
 ?>

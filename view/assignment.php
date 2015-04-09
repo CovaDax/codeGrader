@@ -17,13 +17,18 @@
 		*		Test Cases
 		*/
 		if($_SESSION['role']=="INSTRUCTOR" || $_SESSION['role']=="ADMIN") { ?>
-			<form class="form-horizontal" action="../scripts/testcases.php" method="POST">
+			<?php
+				echo "<form class='form-horizontal' action='../scripts/testcases.php?id=" . $assignment[0]['id'] . "' method='POST'>";
+			?>
 			  <fieldset>
 			    <div class="form-group">
 			      <label for="textArea" class="col-lg-2 control-label">Test Cases</label>
 			      <div class="col-lg-7">
 			      	<?php 
 			      		$text = file_get_contents(ROOT_PATH . "/uploads/$sessioncrn/$sessionid/testcases.txt");
+			      		$text = str_replace(",", " ", $text);
+			      		$text = str_replace("  ", " ", $text);
+			      		$text = ltrim($text);
 			      		//exec("chmod 777 resources/uploads/$sessioncrn/$sessionid/testcases.txt");
 			      	?>
 			        	<textarea class='form-control' rows='3' id='textArea' name='testcase'> <?php echo $text; ?> </textarea>
@@ -69,16 +74,16 @@
 				<?php
 				    foreach($submissions as $key=>$submission){
 						if($submission['grade'] > 80 && $compiled == 1) echo "<TR class='success'>";
-								else if($submission['grade'] > 60 && $submission['grade'] < 80 && $assignment['compiled'] == 1) echo "<TR class='warning'>";
-								else if($submission['grade'] < 50 && $submission['grade']!=NULL || $assignment['compiled'] == -1) echo "<TR class='danger'>";
-								else echo "<TR>";
-									echo "<TD>";
-										include ROOT_PATH . "/scripts/readfiles.php";
-									echo "<TD>";
-										if($assignment['compiled'] != 0)
-											echo $submission['grade'] . "%";
-									echo "</TD>";
-								echo "</TR>";
+						else if($submission['grade'] > 60 && $submission['grade'] < 80 && $assignment['compiled'] == 1) echo "<TR class='warning'>";
+						else if($submission['grade'] < 50 && $submission['grade']!=NULL || $assignment['compiled'] == -1) echo "<TR class='danger'>";
+						else echo "<TR>";
+							echo "<TD>";
+								include ROOT_PATH . "/scripts/readfiles.php";
+							echo "<TD>";
+								if($assignment['compiled'] != 0)
+									echo $submission['grade'] . "%";
+								echo "</TD>";
+							echo "</TR>";
 				    }
 			    ?>
 			</TABLE>
@@ -87,8 +92,8 @@
 		<div class="panel-footer">
 			<?php
 				$now = date("Y-m-d H:i:s");
-				if((time()-(60*60*24)) < strtotime($dbassignmentdeadline)){
-					include("templates/forms/submit.php");
+				if((time()-(60*60*24)) > strtotime($dbassignmentdeadline)){
+					include("templates/submit.php");
 				} else {
 					echo "<div class='alert alert-dismissable alert-danger'>";
 					  	echo "<button type='button' class='close' data-dismiss='alert'>×</button>";

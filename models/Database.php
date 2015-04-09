@@ -25,7 +25,6 @@
 	    }
 
 		public function query($sql){
-			echo $this->host;
 			$connection = new mysqli($this->host, $this->user, $this->password, $this->database);
 			$result = $connection->query($sql);
 			return $result;

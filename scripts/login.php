@@ -4,10 +4,6 @@
 	$username = $_POST['username'];
 	$password = $_POST['password'];
 
-	function __AUTOLOAD($class_name){
-		include ROOT_PATH . "/models/" . $class_name.".php";
-	}
-
 	if($username && $password){
 		$db = new Database($config['db']);
 		$sql = "SELECT * FROM user WHERE username = '$username'";
@@ -38,7 +34,7 @@
 	   				$_SESSION['lastName']=$user->lastName;
 	   				$_SESSION['role']=$user->role;
 	   				$_SESSION['user'] = $user;
-					header('Location:http://' . $host . '/~andrew/CodeGrader/index.php', true) or die("could not change to index");
+					header("Location:http://" . $relative . '/index.php', true) or die("could not change to index");
 	   			} else {
 	   				die("Incorrect Login");
 	   			}

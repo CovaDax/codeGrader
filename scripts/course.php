@@ -1,8 +1,4 @@
 <?php
-	function __AUTOLOAD($class_name){
-		include_once(ROOT_PATH . "/models/" . $class_name . ".php");
-	}
-
 	session_start();
     if(!isset($_SESSION["username"])){
         header("Location:http://" . $relative . "/index.php");

@@ -7,11 +7,11 @@
         you'll only need to update it here.
     */
 
-    $_SERVER["ROOT_PATH"] = "~andrew/codeGrader";
+    //$_SERVER['HTTP_HOST'] = '/var/www/html';
     $host = $_SERVER['HTTP_HOST'];
     $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-    $root = $_SERVER['HTTP_HOST'] . "/~andrew/CodeGrader";
-    $relative = "/~andrew/CodeGrader";
+    $root = $_SERVER['HTTP_HOST'] . "/projects/codeGrader";
+    $relative = $_SERVER['HTTP_HOST'] . "/projects/codeGrader";
      
     $config = array(
         "db" => array(
@@ -53,21 +53,16 @@
 
     define('ROOT_DIR', dirname(__FILE__));
 
-    defined("LIBRARY_PATH")
-        or define("LIBRARY_PATH", realpath(__DIR__ . '/resources/library'));
+    defined("VIEW_PATH")
+        or define("VIEW_PATH", realpath(__DIR__ . '/view'));
          
-    defined("TEMPLATES_PATH")
-        or define("TEMPLATES_PATH", realpath(__DIR__ . '/resources/templates'));
+    defined("SCRIPTS_PATH")
+        or define("SCRIPTS_PATH", realpath(__DIR__ . '/scripts'));
 
     defined("ROOT_PATH")
         or define("ROOT_PATH", realpath(__DIR__ . '' ));
 
 
-     
-    /*
-        Error reporting.
-    */
-    ini_set("error_reporting", "true");
-    error_reporting(E_ALL|E_STRCT);
- 
+    include ROOT_PATH . "/functions.php";
+
 ?>

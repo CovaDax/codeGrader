@@ -33,7 +33,7 @@
 							echo "<TD>" . $course['department'] . $course['section'] . "</a></TD>";
 						 	echo "<TD>" . $course['crn'] . "</a></TD>";
 						 	if($_SESSION['role'] == "ADMIN"){
-						 		echo "<TD><a href='../scripts/deletecourse.php?crn=" . $course['crn'] . "'>Delete</a></TD>";
+						 		echo "<TD><a href='../scripts/delete_course.php?crn=" . $course['crn'] . "'>Delete</a></TD>";
 						 	}
 					    }
 				    ?>

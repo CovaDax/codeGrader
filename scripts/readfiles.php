@@ -1,8 +1,9 @@
 <?php
-	$files = scandir($submission['files']);
+	$files = scandir(ROOT_PATH . "/" . $submission['files']);
 	$newdir = explode("/",$submission['files']);
 	rsort($files);
 	$userdir = $newdir[4];
+	$nicedir = $newdir[4];
 
 	if($_SESSION['role'] == "STUDENT") {
 		foreach ($files as $file) {
@@ -16,11 +17,11 @@
 
 		foreach ($files as $file) {
 		    if ($file != '.' && $file != '..') {
-		        echo '<a href="#">' . $submission['files'] . "/" . $file . '</a></br>';
+		        echo '<a href="#">' . $file . '</a></br>';
 		    }
 		}
 
-		echo "<FORM action='" . $relative . "/scripts/gradefiles.php?title=" . $submission['files'] . "&user=$userdir' method='post'>";
+		echo "<FORM action='http://" . $root . "/scripts/gradefiles.php?title=" . $submission['files'] . "&user=$userdir' method='post'>";
 			echo "<button class='btn btn-primary' type='submit'>Grade</button>";
 		echo "</FORM>";
 
