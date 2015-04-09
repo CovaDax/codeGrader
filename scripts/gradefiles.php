@@ -60,6 +60,25 @@
   </fieldset>
 </form>
 
+	<div class='alert alert-dismissable alert-success'>
+		<?php
+			passthru("rm " . ROOT_PATH . "/uploads/" . $newdir[1] . "/" . $assignmentid . "/Solutions.class");
+			if(file_exists(ROOT_PATH . "/uploads/" . $newdir[1] . "/" . $assignmentid . "/Solutions.java")){
+				echo "<PRE>";
+					passthru("javac " . ROOT_PATH . "/uploads/" . $newdir[1] . "/" . $assignmentid . "/Solutions.java");
+					if(file_exists(ROOT_PATH . "/uploads/" . $newdir[1] . "/$assignmentid/Solutions.class")){
+						system("java -cp " . ROOT_PATH . "/uploads/" . $newdir[1] . "/" . $assignmentid . " Solutions 2>&1");
+					} else {
+						echo "javac " . ROOT_PATH . "/uploads/" . $newdir[1] . "/" . $assignmentid . "/Solutions.java";
+						//echo "java -cp " . ROOT_PATH . "/uploads/" . $newdir[1] . "/" . $assignmentid . "/Solutons 2>&1";
+					}
+				echo "</PRE>";
+			} else {
+				echo ROOT_PATH . "/uploads/" . $newdir[1] . "/" . $assignmentid . "/Solutions.java";
+			}
+		?>
+	</div>
+
 	<?php
 	passthru("rm " . $runname);
 	if(file_exists(ROOT_PATH . "/" . $compilename)){

@@ -8,9 +8,9 @@
     $sql;
 	if($_SESSION['role'] == "ADMIN") {
 		$sql = "SELECT * FROM course";
-	} elseif($_SESSION['role'] == "STUDENT") {
-	 	$sql = "SELECT * FROM course
-		INNER JOIN user_course ON crn = course_id AND user_id = '" . $_SESSION['userid']
+	} elseif($_SESSION['role'] == "STUDENT" || $_SESSION['role'] == "INSTRUCTOR") {
+	 	$sql = "SELECT * FROM course c
+		INNER JOIN user_course uc ON c.crn = uc.course_id AND uc.user_id = '" . $_SESSION['userid']
 		. "' LIMIT 0, 30 ";
 	}
     $results = $db->query($sql);

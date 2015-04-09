@@ -19,7 +19,20 @@
 	}
 
 	$directory = "uploads/".$sessioncrn."/".$dbassignmentid."/".$_SESSION['username'];
-	echo $directory;
+
+	if($_FILES["fileToUpload"]["name"]=="Solutions.java"){
+		$directory = "uploads/".$sessioncrn."/".$dbassignmentid;
+		$target_file = ROOT_PATH . "/" . $directory . "/" .basename($_FILES["fileToUpload"]["name"]);
+		$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+		if (move_uploaded_file($_FILES["fileToUpload"]['tmp_name'], $target_file)) {
+	        echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+	    } else {
+	        echo "Sorry, there was an error uploading your file.";
+	    }
+	    header("Location:../view/assignment.php?id=" . $sessionid . "&crn=" . $sessioncrn);
+	}
+
+	//echo $directory;
 	if(!file_exists(ROOT_PATH . "/" . $directory)){
 		if(!mkdir(ROOT_PATH . "/" . $directory, 0775, true)){
 			die("failed to create folders");
@@ -27,14 +40,6 @@
 
 		}
 	}
-
-
-	//Check if directory is in DB
-		//if it is
-
-		//if its not
-			//add directory
-			//link relation tables
 
 	$submissions[] = array();
 	$results = $db->query("SELECT * FROM submission WHERE files = '$directory'");
@@ -53,7 +58,7 @@
 		}
 	}
 
-	$target_file = $directory . "/" .basename($_FILES["fileToUpload"]["name"]);
+	$target_file = ROOT_PATH . "/" . $directory . "/" .basename($_FILES["fileToUpload"]["name"]);
 	$uploadOk = 1;
 	$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 
@@ -75,6 +80,10 @@
 	    echo "Sorry, your file was not uploaded.";
 	// if everything is ok, try to upload file
 	} else {
+
+		echo "FILES  " . $_FILES["fileToUpload"]["name"];
+		//echo "Target  " . $target_file;
+
 	    if (move_uploaded_file($_FILES["fileToUpload"]['tmp_name'], $target_file)) {
 	        echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
 	    } else {

@@ -32,10 +32,13 @@
 							}
 						echo "</TR>";
 				    }
-
+				    
+				    if ($_SESSION['role'] == "INSTRUCTOR" || $_SESSION['role'] == "ADMIN") {
 				    echo "<TR>";
 				    	echo "<TD><a href='templates/create_assignment.php'>Create Assignment</a></TD>";
 				    echo "</TR>";
+
+				}
 			    ?>
 			</TABLE>
 		</div>
