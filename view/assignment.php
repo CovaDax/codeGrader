@@ -73,9 +73,9 @@
 				</TR>
 				<?php
 				    foreach($submissions as $key=>$submission){
-						if($submission['grade'] > 80 && $submission['compiled'] == 1) echo "<TR class='success'>";
-						else if($submission['grade'] > 60 && $submission['grade'] < 80 && $submission['compiled'] == 1) echo "<TR class='warning'>";
-						else if($submission['grade'] < 50 && $submission['grade']!=NULL || $submission['compiled'] == -1) echo "<TR class='danger'>";
+						if($submission['grade'] >= 80 && $submission['compiled'] == 1) echo "<TR class='success'>";
+						else if($submission['grade'] < 80 && $submission['grade'] >=60 && $submission['compiled'] == 1) echo "<TR class='warning'>";
+						else if($submission['grade'] <= 59 && $submission['grade']!=NULL || $submission['compiled'] == -1) echo "<TR class='danger'>";
 						else echo "<TR>";
 							echo "<TD>";
 								include ROOT_PATH . "/scripts/readfiles.php";

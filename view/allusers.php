@@ -39,7 +39,7 @@
 						if($row['role']!="BATMAN"){
 							echo "<TR>";
 								echo "<TD>" . $row['id'] . "</TD>";
-								echo "<TD><a href='http://" . $relative . "view/templates/update_user.php?uin=". $row['id'] ."'>" . $row['username'] .  "</a></TD>";
+								echo "<TD><a href='http://" . $root . "/view/register_user.php?uin=". $row['id'] ."'>" . $row['username'] .  "</a></TD>";
 								echo "<TD>" . $row['firstName'] .  "</TD>";
 								echo "<TD>" . $row['lastName'] . "</TD>";
 								echo "<TD>" . $row['email'] . "</TD>";

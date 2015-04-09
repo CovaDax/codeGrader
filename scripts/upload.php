@@ -19,9 +19,9 @@
 	}
 
 	$directory = "uploads/".$sessioncrn."/".$dbassignmentid."/".$_SESSION['username'];
-
+	echo $directory;
 	if(!file_exists(ROOT_PATH . "/" . $directory)){
-		if(!mkdir($directory, 0775, true)){
+		if(!mkdir(ROOT_PATH . "/" . $directory, 0775, true)){
 			die("failed to create folders");
 		} else {
 
