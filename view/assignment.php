@@ -69,20 +69,20 @@
 				<CAPTION><CENTER><H2>Your Assignments</H2></CENTER></CAPTION>
 				<TR>
 					<TH>Assignment</TH>
-					<TH>Deadline</TH>
+					<TH>Grade</TH>
 				</TR>
 				<?php
 				    foreach($submissions as $key=>$submission){
-						if($submission['grade'] > 80 && $compiled == 1) echo "<TR class='success'>";
-						else if($submission['grade'] > 60 && $submission['grade'] < 80 && $assignment['compiled'] == 1) echo "<TR class='warning'>";
-						else if($submission['grade'] < 50 && $submission['grade']!=NULL || $assignment['compiled'] == -1) echo "<TR class='danger'>";
+						if($submission['grade'] > 80 && $submission['compiled'] == 1) echo "<TR class='success'>";
+						else if($submission['grade'] > 60 && $submission['grade'] < 80 && $submission['compiled'] == 1) echo "<TR class='warning'>";
+						else if($submission['grade'] < 50 && $submission['grade']!=NULL || $submission['compiled'] == -1) echo "<TR class='danger'>";
 						else echo "<TR>";
 							echo "<TD>";
 								include ROOT_PATH . "/scripts/readfiles.php";
 							echo "<TD>";
-								if($assignment['compiled'] != 0)
+								if($submission['compiled'] != 0)
 									echo $submission['grade'] . "%";
-								echo "</TD>";
+							echo "</TD>";
 							echo "</TR>";
 				    }
 			    ?>

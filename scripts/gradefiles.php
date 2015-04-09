@@ -73,7 +73,7 @@
 				echo "<button type='button' class='close' data-dismiss='alert'></button>";
 				echo "<PRE>";
 					echo $compiled;
-					system("java -cp " . $postdir . " " . $assignmenttitle . "_" . $lastfour . " " . $line . " 2>&1");
+					echo exec("java -cp " . ROOT_PATH . "/" . $postdir . " " . $assignmenttitle . "_" . $lastfour . " " . $line . " 2>&1");
 				echo "</PRE>";
 				echo "</div>";
 			}
