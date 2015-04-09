@@ -32,9 +32,14 @@
 							}
 						echo "</TR>";
 				    }
+
+				    echo "<TR>";
+				    	echo "<TD><a href='templates/create_assignment.php'>Create Assignment</a></TD>";
+				    echo "</TR>";
 			    ?>
 			</TABLE>
 		</div>
+
 		</div>
 	</BODY>
 </HTML>

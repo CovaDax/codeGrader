@@ -17,8 +17,6 @@
 
 	$db = new Database($config['db']);
 
-		echo $submissionusername;
-
 	$sql = "SELECT * FROM user WHERE username = '$submissionusername'";
 	$result = $db->query($sql);
 	$user = array();
@@ -72,8 +70,7 @@
 				echo "<div class='alert alert-dismissable alert-success'>";
 				echo "<button type='button' class='close' data-dismiss='alert'></button>";
 				echo "<PRE>";
-					echo $compiled;
-					echo exec("java -cp " . ROOT_PATH . "/" . $postdir . " " . $assignmenttitle . "_" . $lastfour . " " . $line . " 2>&1");
+					system("java -cp " . ROOT_PATH . "/" . $postdir . " " . $assignmenttitle . "_" . $lastfour . " " . $line . " 2>&1");
 				echo "</PRE>";
 				echo "</div>";
 			}
