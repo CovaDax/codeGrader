@@ -10,18 +10,18 @@
     //$_SERVER['HTTP_HOST'] = '/var/www/html';
     $host = $_SERVER['HTTP_HOST'];
     $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-    $root = $_SERVER['HTTP_HOST'] . "/projects/codeGrader";
-    $relative = $_SERVER['HTTP_HOST'] . "/projects/codeGrader";
+    $root = $_SERVER['HTTP_HOST'] . "/~agari/codeGrader";
+    $relative = $_SERVER['HTTP_HOST'] . "/~agari/codeGrader";
      
     $config = array(
         "db" => array(
-            "db1" => array(
+            "db2" => array(
                 "dbname" => "codeGraderDB",
                 "username" => "root",
                 "password" => "password",
                 "host" => "localhost"
             ),
-            "db2" => array(
+            "db1" => array(
                 "dbname" => "codegrader",
                 "username" => "codegrader",
                 "password" => "6NCPpzBuuN4Xy39m",
