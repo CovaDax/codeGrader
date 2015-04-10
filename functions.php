@@ -32,6 +32,7 @@
 	}
 
 	function delete_assignment($db, $crn, $id){
+		echo "TEST";
 		$result = $db->query("SELECT * FROM assignment_submission WHERE assignment_id = '$id'");
 		if($result->num_rows!=0){
 			while($row = $result->fetch_assoc()){
@@ -39,7 +40,7 @@
 				delete_submission($db, $crn,$id,$row['submission_id']);
 			}
 		}
-		$db->query("DELETE FROM assignment_course WHERE assignment_id='$id'") or die(print_r(error_get_last()));
+		$db->query("	DELETE FROM assignment_course WHERE assignment_id='$id'") or die(print_r(error_get_last()));
 		rmdir(ROOT_PATH . "/uploads/" . $crn . "/" . $id);
 	}
 

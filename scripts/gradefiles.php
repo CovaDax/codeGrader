@@ -1,6 +1,7 @@
 <?php
 	
-	include "../config.php";
+	include_once "../config.php";
+	include_once "templates/navbar.php"
 	session_start();
 	$postdir = $_GET['title'];
 	$newdir = explode("/",$postdir);
